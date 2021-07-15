@@ -10,7 +10,7 @@ public class ArbolP
     String valor;
     ArbolP ramaIzquierda;
     ArbolP ramaDerecha;
-    ListaPeliculasP listaPunteros;
+    ListaPunterosP listaPunteros;
     
     /**
      * Constructor crea la raiz del arbol
