@@ -7,8 +7,9 @@
  */
 public class ArbolP
 {
-    String valor;
+    String categoria;
     ArbolP ramaIzquierda;
+    Boolean usado;
     ArbolP ramaDerecha;
     ListaPunterosP listaPunteros;
     
@@ -16,7 +17,8 @@ public class ArbolP
      * Constructor crea la raiz del arbol
      */
     public ArbolP(String valor){
-        this.valor = valor;
+        this.categoria = valor;
+        Boolean usado = false;
         this.ramaIzquierda = null;
         this.ramaDerecha = null;
         this.listaPunteros = null;
@@ -28,22 +30,55 @@ public class ArbolP
      * @param valorNuevo El valor nuevo que se agregara al arbol
      */
     public void agrega(String valorNuevo){ 
-        if (this.valor.compareToIgnoreCase(valorNuevo) < 0){                             
+        if (this.categoria.compareToIgnoreCase(valorNuevo) < 0){                             
             if (this.ramaDerecha == null){
                 this.ramaDerecha = new ArbolP(valorNuevo);
             }else{
                 ramaDerecha.agrega(valorNuevo);
             }
         }else{
-            if ((this.valor.compareToIgnoreCase(valorNuevo) > 0) && (this.ramaIzquierda == null)){ 
+            if ((this.categoria.compareToIgnoreCase(valorNuevo) > 0) && (this.ramaIzquierda == null)){ 
                 this.ramaIzquierda = new ArbolP(valorNuevo);
             }else{
-                if (this.valor.compareToIgnoreCase(valorNuevo) != 0)                     
+                if (this.categoria.compareToIgnoreCase(valorNuevo) != 0)                     
                     this.ramaIzquierda.agrega(valorNuevo);
             }
         }
     }
     
+    public boolean existeCategoria(String categoriaQuerida){
+        boolean existe = false;  //valor no existe
+        if ((this.categoria.equalsIgnoreCase(categoriaQuerida))){
+            existe = true;
+        }
+        else{
+            if (ramaDerecha != null)
+                ramaDerecha. existeCategoria(categoriaQuerida);
+            if (ramaIzquierda != null)
+                ramaIzquierda. existeCategoria(categoriaQuerida);
+        }
+        return existe;
+    }
+    
+    public void agregaPunteros(ListaPunterosP apuntador, String categoriaQuerida){
+        if(existeCategoria(categoriaQuerida) ){
+            if(this.categoria.equalsIgnoreCase(categoriaQuerida)){
+                usado = true;
+                this.listaPunteros = apuntador;
+            }
+            else{
+                if(ramaDerecha != null){
+                    this.ramaDerecha.agregaPunteros(apuntador , categoriaQuerida);       
+                }
+                if(ramaIzquierda != null){
+                    this.ramaIzquierda.agregaPunteros(apuntador , categoriaQuerida);    
+                }
+            }
+        }
+        else{
+            System.out.println("Su categoria es inexistente en este arbol, vuelva a intentar");
+        }
+    }
     
     /**
      * Imprimir el arbol en forma transversal (Basado en los programas del curso)
@@ -57,7 +92,7 @@ public class ArbolP
             tiraArbol += this.ramaDerecha.imprime(t+"\t");
         }
         
-        tiraArbol += t + this.valor + "\n";
+        tiraArbol += t + this.categoria + "\n";
         
         if (this.ramaIzquierda != null){
             tiraArbol += this.ramaIzquierda.imprime(t+"\t");
@@ -65,5 +100,4 @@ public class ArbolP
         
         return tiraArbol;
     }
-    
 }
