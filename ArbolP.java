@@ -46,6 +46,13 @@ public class ArbolP
         }
     }
     
+    /**
+     * Manda si el valor existe o no (Basado en los programas del curso)
+     * 
+     * @param categoriaQuerida: Categoria buscada en el arbol
+     * @return existe: True si existe el valor, false si no existe
+     */
+    
     public boolean existeCategoria(String categoriaQuerida){
         boolean existe = false;  //valor no existe
         if ((this.categoria.equalsIgnoreCase(categoriaQuerida))){
@@ -60,8 +67,13 @@ public class ArbolP
         return existe;
     }
     
+    /**
+     * Agrega un puntero a cada nodo del arbol(Basado en los programas del curso)
+     * 
+     * @param categoriaQuerida: Lugar donde se coloca el puntero
+     * @param apuntador: Puntero que apunta a la lista punteros
+     */
     public void agregaPunteros(ListaPunterosP apuntador, String categoriaQuerida){
-        if(existeCategoria(categoriaQuerida) ){
             if(this.categoria.equalsIgnoreCase(categoriaQuerida)){
                 usado = true;
                 this.listaPunteros = apuntador;
@@ -73,11 +85,7 @@ public class ArbolP
                 if(ramaIzquierda != null){
                     this.ramaIzquierda.agregaPunteros(apuntador , categoriaQuerida);    
                 }
-            }
-        }
-        else{
-            System.out.println("Su categoria es inexistente en este arbol, vuelva a intentar");
-        }
+            }   
     }
     
     /**
@@ -85,11 +93,12 @@ public class ArbolP
      * 
      * @return tiraArbol String con el contenido del arbol
      */
+    
     public String imprime(String t){
         String tiraArbol = "";
         
         if (this.ramaDerecha != null){
-            tiraArbol += this.ramaDerecha.imprime(t+"\t");
+            tiraArbol += this.ramaDerecha.imprime(t+" \t");
         }
         
         tiraArbol += t + this.categoria + "\n";

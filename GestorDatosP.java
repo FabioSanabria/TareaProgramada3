@@ -83,14 +83,54 @@ public class GestorDatosP
         // Leer todas las categorias de la lista de peliculas y agregarlas al arbol
         int tamannoLista = listaPeliculas.tamanno();
         for (int indice = 0; indice < tamannoLista; indice++){
-            System.out.println();
+            System.out.println(); 
             PeliculaP peliculaBuscada = listaPeliculas.peliculaEnPosicion(indice);
             String[] categoriasPeliculas = peliculaBuscada.categorias;
             for (int indiceCategoria = 0; indiceCategoria < categoriasPeliculas.length; indiceCategoria++){
-                System.out.println(categoriasPeliculas[indiceCategoria]);
+                //System.out.println(categoriasPeliculas[indiceCategoria]);
                 arbolCategorias.agrega(categoriasPeliculas[indiceCategoria]);
             }
         }
+    }
+    
+    /**
+     * Recorrer cada pelicula de la lista*, sacar cada categoria*, buscarla en el arbol de categorias*, crear un puntero de la lista de punteros
+     * hacia el objeto pelicula de la lista de peliculas.
+     */
+    public void creaPunterosCategorias(){
+        int tamañoLista = listaPeliculas.tamanno();
+        for(int i = 0; i < tamañoLista; i++){
+            PeliculaP peliculaBuscada = listaPeliculas.peliculaEnPosicion(i); //me da el objeto pelicula que esta en la posicion dada y la guarda en la var
+            String[] categoriasPeliculas = peliculaBuscada.categorias; // Guarda las categorias de la peli
+            for(int indiceCategoria = 0; indiceCategoria < categoriasPeliculas.length; indiceCategoria++){
+                arbolCategorias.existeCategoria(categoriasPeliculas[indiceCategoria]);
+                if(arbolCategorias.existeCategoria(categoriasPeliculas[indiceCategoria]) == true){
+                    ListaPunterosP apuntadorListaPeliculas = new ListaPunterosP(); //Crea puntero de lista punteros 
+                    arbolCategorias.agregaPunteros(apuntadorListaPeliculas,categoriasPeliculas[indiceCategoria]);
+                }
+            }
+        }        
+    }
+ 
+    /**
+     * Metodo encargado de preguntar directamente cuales peliculas se encuentran en la categoriaBuscada
+     * 
+     * @param categoriaBuscada: Se buscan las peliculas que se encuentran en esta categoria
+     */
+    public void consultaPeliculasCategoria(String categoriaBuscada){
+        int tamañoLista = listaPeliculas.tamanno();
+        System.out.println("Peliculas de " + categoriaBuscada); //Cada pelicula tiene varias categorias
+        for(int i = 0; i < tamañoLista; i++){
+            PeliculaP peliculaBuscada = listaPeliculas.peliculaEnPosicion(i); //Objeto Pelicula
+            String[] categoriaPelicula = peliculaBuscada.categorias;
+            String pelicula = peliculaBuscada.titulo;
+            for(int z = 0; z < categoriaPelicula.length; z++){
+                if(categoriaPelicula[z].equalsIgnoreCase(categoriaBuscada)){
+                    System.out.println(pelicula);
+                    break;
+                }   
+            }
+        }  
     }
     
     /**
@@ -98,14 +138,6 @@ public class GestorDatosP
      * 
      */
     public void creaArbolActores(){
-    }
-    
-    /**
-     * Recorrer cada pelicula de la lista, sacar cada categoria, buscarla en el arbol de categorias, crear un puntero de la lista de punteros
-     * hacia el objeto pelicula de la lista de peliculas.
-     * 
-     */
-    public void creaPunterosCategorias(){
     }
     
         /**

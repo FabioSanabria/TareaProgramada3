@@ -1,5 +1,5 @@
 import javax.swing.JOptionPane;
-
+import java.util.*;
 /**
  * Programa principal
  * 
@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 public class ControladorP
 {
     GestorDatosP gestorDatos;
+    Scanner in = new Scanner(System.in);
     
     /**
      * Constructor instancia el gestor de datos
@@ -33,10 +34,24 @@ public class ControladorP
     }
     
     /**
+     * Consulta cuales peliculas se encuentran en la categoriaBuscada
+     * 
+     * @param categoriaBuscada: Categoria que se toma como base para conseguir sus peliculas 
+     */
+    public void consultaPeliculasCategoria(String categoriaBuscada){
+        System.out.println();
+        gestorDatos.consultaPeliculasCategoria(categoriaBuscada);
+    }
+    
+    /**
      * Crear el arbol de categorias
      */
     public void creaArbolCategorias(){
         gestorDatos.creaArbolCategorias();
+    }
+    
+    public void creaPunterosCategorias(){
+        gestorDatos.creaPunterosCategorias();
     }
     
     /**
@@ -81,10 +96,11 @@ public class ControladorP
      */
     public void menuControlador(){
         String menu = "1.Cargar datos de peliculas desde archivo\n2.Ver la lista de peliculas\n3.Crear al arbol de categorias\n" + 
-                       "4.Ver el arbol de categorias\n5.Salir";
+                       "4.Ver el arbol de categorias\n" + "5.Crear los punteros del arbol categoria \n" + 
+                       "6.Busqueda de peliculas dependiendo de categoria\n" +"7.Salir";
         int opcionDigitada;
         do{
-            opcionDigitada = controlaMenu(1,5,menu);
+            opcionDigitada = controlaMenu(1,6,menu);
             switch (opcionDigitada) {
                 case 1: cargaPeliculas();
                 break;
@@ -94,14 +110,20 @@ public class ControladorP
                 break;
                 case 4: imprimeArbolCategorias();
                 break;
+                case 5: creaPunterosCategorias();
+                break;
+                case 6:
+                System.out.println("Deme una categoria que este disponible");
+                String categoria = in.nextLine();
+                consultaPeliculasCategoria(categoria);
                 default:
             }
-        }while(opcionDigitada != 5);
+        }while(opcionDigitada != 6);
     }
-    
     
     public static void main(){
         ControladorP controlador = new ControladorP();
         controlador.menuControlador();
+        controlador.creaArbolCategorias();
     }
 }
