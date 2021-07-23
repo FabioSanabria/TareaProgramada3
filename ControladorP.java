@@ -62,6 +62,16 @@ public class ControladorP
     }
     
     /**
+     * Consulta cuales peliculas se encuentran en la actorBuscada
+     * 
+     * @param actorBuscada: Actor que se toma como base para conseguir sus peliculas 
+     */
+    public void consultaPeliculasActor(String actorBuscada){
+        System.out.println();
+        gestorDatos.consultaPeliculasActor(actorBuscada);
+    }
+    
+    /**
      * Crear el arbol de actores
      */
     public void creaArbolActores(){
@@ -119,7 +129,7 @@ public class ControladorP
         String menu = "1.Cargar datos de peliculas desde archivo\n2.Ver la lista de peliculas\n3.Crear al arbol de categorias\n" + 
                        "4.Crear al arbol de actores\n" + "5.Ver el arbol de categorias\n" + "6.Ver el arbol de actores\n" +
                        "7.Crear los punteros del arbol categoria \n" + "8.Crear los punteros del arbol actores \n" + 
-                       "9.Busqueda de peliculas dependiendo de categoria\n" +"10.Salir";
+                       "9.Busqueda de peliculas dependiendo de categoria\n" +"10.Busqueda de peliculas dependiendo de actores\n" +"11.Salir";
         int opcionDigitada;
         do{
             opcionDigitada = controlaMenu(1,6,menu);
@@ -144,9 +154,13 @@ public class ControladorP
                 System.out.println("Deme una categoria que este disponible");
                 String categoria = in.nextLine();
                 consultaPeliculasCategoria(categoria);
+                case 10:
+                System.out.println("Deme un actor que este disponible");
+                String actor = in.nextLine();
+                consultaPeliculasActor(actor);
                 default:
             }
-        }while(opcionDigitada != 10);
+        }while(opcionDigitada != 11);
     }
     public static void main(){
         ControladorP controlador = new ControladorP();
