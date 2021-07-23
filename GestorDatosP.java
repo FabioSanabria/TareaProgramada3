@@ -10,7 +10,7 @@ public class GestorDatosP
 {
     ListaPeliculasP listaPeliculas;
     ArbolP arbolCategorias; 
-
+    ArbolPA arbolActores;
     /**
      * Constructor instancia la lista de peliculas vacia
      */
