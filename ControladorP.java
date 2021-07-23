@@ -62,6 +62,27 @@ public class ControladorP
     }
     
     /**
+     * Crear el arbol de actores
+     */
+    public void creaArbolActores(){
+        gestorDatos.creaArbolActores();
+    }
+    
+    /**
+     * Crea punteros de actores
+     * 
+     */public void creaPunterosActores(){
+        gestorDatos.creaPunterosActores();
+    }
+    
+    /**
+     * Imprimir el arbol de actores
+     */
+    public void imprimeArbolActores(){
+        System.out.println(gestorDatos.arbolActores.imprime("\t"));
+    }
+    
+    /**
      * Controla que las opciones de un menú sean válidas
      * 
      * @param valorMenor El valor menor de las opciones
@@ -96,8 +117,9 @@ public class ControladorP
      */
     public void menuControlador(){
         String menu = "1.Cargar datos de peliculas desde archivo\n2.Ver la lista de peliculas\n3.Crear al arbol de categorias\n" + 
-                       "4.Ver el arbol de categorias\n" + "5.Crear los punteros del arbol categoria \n" + 
-                       "6.Busqueda de peliculas dependiendo de categoria\n" +"7.Salir";
+                       "4.Crear al arbol de actores\n" + "5.Ver el arbol de categorias\n" + "6.Ver el arbol de actores\n" +
+                       "7.Crear los punteros del arbol categoria \n" + "8.Crear los punteros del arbol actores \n" + 
+                       "9.Busqueda de peliculas dependiendo de categoria\n" +"10.Salir";
         int opcionDigitada;
         do{
             opcionDigitada = controlaMenu(1,6,menu);
@@ -108,22 +130,28 @@ public class ControladorP
                 break;
                 case 3: creaArbolCategorias();
                 break;
-                case 4: imprimeArbolCategorias();
+                case 4: creaArbolActores();
                 break;
-                case 5: creaPunterosCategorias();
+                case 5: imprimeArbolCategorias();
                 break;
-                case 6:
+                case 6: imprimeArbolActores();
+                break;
+                case 7: creaPunterosCategorias();
+                break;
+                case 8: creaPunterosActores();
+                break;
+                case 9:
                 System.out.println("Deme una categoria que este disponible");
                 String categoria = in.nextLine();
                 consultaPeliculasCategoria(categoria);
                 default:
             }
-        }while(opcionDigitada != 6);
+        }while(opcionDigitada != 10);
     }
-    
     public static void main(){
         ControladorP controlador = new ControladorP();
         controlador.menuControlador();
         controlador.creaArbolCategorias();
+        controlador.creaArbolActores();
     }
 }
