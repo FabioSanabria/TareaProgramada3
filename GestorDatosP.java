@@ -133,18 +133,44 @@ public class GestorDatosP
         }  
     }
     
-    /**
-     * Crear el arbol de actores a partir del reparto de las peliculas que se encuentran en la lista
+   /**
+     * Crear el arbol de actores a partir de todas las categorias de las peliculas que se encuentran en la lista
      * 
      */
     public void creaArbolActores(){
-    }
+        // Crear el arbol con un actor que tienda a estar en el centro del alfabeto
+        this.arbolActores = new ArbolPA("Malcolm McDowell");
+        
+        // Leer todas los actores de la lista de peliculas y agregarlas al arbol
+        int tamannoLista = listaPeliculas.tamanno();
+        for (int indice = 0; indice < tamannoLista; indice++){
+            System.out.println(); 
+            PeliculaP peliculaBuscada = listaPeliculas.peliculaEnPosicion(indice);
+            String[] actoresPeliculas = peliculaBuscada.actores;
+            for (int indiceActor = 0; indiceActor < actoresPeliculas.length; indiceActor++){
+                
+                arbolActores.agrega(actoresPeliculas[indiceActor]);
+            }
+        }
+      }
     
-        /**
-     * Recorrer cada pelicula de la lista, sacar cada actor, buscarlo en el arbol de actores, crear un puntero de la lista de punteros
+       /**
+     * Recorrer cada pelicula de la lista, saca cada actor,lo  busca en el arbol de actores, crear un puntero de la lista de punteros
      * hacia el objeto pelicula de la lista de peliculas.
      * 
      */
     public void creaPunterosActores(){
-    }
+        int tamañoLista = listaPeliculas.tamanno();
+        for(int i = 0; i < tamañoLista; i++){
+            PeliculaP peliculaBuscada = listaPeliculas.peliculaEnPosicion(i); //me da el objeto pelicula que esta en la posicion dada y la guarda en la var
+            String[] actoresPeliculas = peliculaBuscada.actores; 
+            for(int indiceActor = 0; indiceActor < actoresPeliculas.length; indiceActor++){
+                arbolActores.existeActor(actoresPeliculas[indiceActor]);
+                if(arbolActores.existeActor(actoresPeliculas[indiceActor]) == true){
+                    ListaPunterosP apuntadorListaPeliculas = new ListaPunterosP(); //Crea puntero de lista punteros 
+                    arbolCategorias.agregaPunteros(apuntadorListaPeliculas,actoresPeliculas[indiceActor]);
+                }
+            }
+        }   
+     }
 }
