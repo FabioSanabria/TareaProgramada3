@@ -173,4 +173,25 @@ public class GestorDatosP
             }
         }   
      }
+    
+    /**
+     * Metodo encargado de preguntar directamente cuales peliculas se encuentran en el actorBuscada
+     * 
+     * @param actorBuscada: Se buscan las peliculas que se encuentran en con el actor en el elenco
+     */
+    public void consultaPeliculasActor(String actorBuscada){
+        int tamañoLista = listaPeliculas.tamanno();
+        System.out.println("Peliculas que aprece:  " + actorBuscada); //Cada pelicula tiene varios actores
+        for(int i = 0; i < tamañoLista; i++){
+            PeliculaP peliculaBuscada = listaPeliculas.peliculaEnPosicion(i);
+            String[] actorPelicula = peliculaBuscada.actores;
+            String pelicula = peliculaBuscada.titulo;
+            for(int z = 0; z < actorPelicula.length; z++){
+                if(actorPelicula[z].equalsIgnoreCase(actorBuscada)){
+                    System.out.println(pelicula);
+                    break;
+                }   
+            }
+        }  
+    }
 }
