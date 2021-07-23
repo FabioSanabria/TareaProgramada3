@@ -46,12 +46,12 @@ public class GestorDatosP
                 String duracion = vectorCampos[9];
                 String[] categorias = vectorCampos[10].split(",");
                 String descripcion = vectorCampos[11];
-                
+
                 // Quitar los espacios en blanco al inicio y al final del string
                 for(int i = 0; i < categorias.length; i++){
                     categorias[i] = categorias[i].trim();
                 }
-                
+
                 // Quitar los espacios en blanco al inicio y al final del string
                 for(int i = 0; i < actores.length; i++){
                     actores[i] = actores[i].trim();
@@ -59,7 +59,7 @@ public class GestorDatosP
 
                 // Crear el objeto pelicula
                 PeliculaP pelicula = new PeliculaP(showId, tipo, titulo, director, actores, paisProcedencia, fechaAgregacion,
-                                                    anoProduccion, audiencia, duracion, categorias, descripcion); 
+                        anoProduccion, audiencia, duracion, categorias, descripcion); 
                 // Agregar la pelicula a la lista
                 this.listaPeliculas.agrega(pelicula);
 
@@ -79,7 +79,7 @@ public class GestorDatosP
     public void creaArbolCategorias(){
         // Crear el arbol con una categoria que tienda a estar en el centro del alfabeto
         this.arbolCategorias = new ArbolP("Music & Musicals");
-        
+
         // Leer todas las categorias de la lista de peliculas y agregarlas al arbol
         int tamannoLista = listaPeliculas.tamanno();
         for (int indice = 0; indice < tamannoLista; indice++){
@@ -92,7 +92,7 @@ public class GestorDatosP
             }
         }
     }
-    
+
     /**
      * Recorrer cada pelicula de la lista*, sacar cada categoria*, buscarla en el arbol de categorias*, crear un puntero de la lista de punteros
      * hacia el objeto pelicula de la lista de peliculas.
@@ -111,7 +111,7 @@ public class GestorDatosP
             }
         }        
     }
- 
+
     /**
      * Metodo encargado de preguntar directamente cuales peliculas se encuentran en la categoriaBuscada
      * 
@@ -132,15 +132,57 @@ public class GestorDatosP
             }
         }  
     }
-    
-   /**
+
+    /**
+     * Metodo encargado de preguntar directamente la informacion total de las peliculas que se encuentran en la categoriaBuscada
+     * 
+     * @param categoriaBuscada: Se buscan las peliculas que se encuentran en esta categoria
+     */
+    public void consultaTotalPeliculas(String categoriaBuscada){
+        int tamañoLista = listaPeliculas.tamanno();
+        System.out.println("Datos de peliculas que pertenecen a la categoria " + categoriaBuscada); //Cada pelicula tiene varias categorias
+        for(int i = 0; i < tamañoLista; i++){
+            PeliculaP peliculaBuscada = listaPeliculas.peliculaEnPosicion(i); //Objeto Pelicula
+            String[] categoriaPelicula = peliculaBuscada.categorias;
+            String pelicula = peliculaBuscada.titulo;
+            String Id = peliculaBuscada.showId;
+            String director = peliculaBuscada.director;
+            String[] actores = peliculaBuscada.actores;
+            String pais = peliculaBuscada.paisProcedencia;
+            String fechaAgregacion = peliculaBuscada.fechaAgregacion;
+            String anoProduccion = peliculaBuscada.anoProduccion;
+            String audiencia = peliculaBuscada.audiencia;
+            String duracion = peliculaBuscada.duracion;
+            String descripcion = peliculaBuscada.descripcion;
+            for(int z = 0; z < categoriaPelicula.length; z++){
+                if(categoriaPelicula[z].equalsIgnoreCase(categoriaBuscada)){
+                    System.out.println("Pelicula: " + pelicula);
+                    System.out.println("ID:  " + Id);
+                    System.out.println("Director: " + director);
+                    for(int w = 0; w < actores.length; w++){
+                        System.out.print("Actores: " + actores[w] + ", ");
+                    }
+                    System.out.println("Pais de procedencia:  " + pais);
+                    System.out.println("Fecha de agregacion:  " + fechaAgregacion);
+                    System.out.println("Año de Produccion:  " + anoProduccion);
+                    System.out.println("Audiencia: " + audiencia);
+                    System.out.println("Duracion de la pelicula: " + audiencia);
+                    System.out.println("Descripcion de la pelicula: " + audiencia);
+                    System.out.println();
+                    break;
+                }   
+            }
+        }  
+    }
+
+    /**
      * Crear el arbol de actores a partir de todas las categorias de las peliculas que se encuentran en la lista
      * 
      */
     public void creaArbolActores(){
         // Crear el arbol con un actor que tienda a estar en el centro del alfabeto
         this.arbolActores = new ArbolPA("Malcolm McDowell");
-        
+
         // Leer todas los actores de la lista de peliculas y agregarlas al arbol
         int tamannoLista = listaPeliculas.tamanno();
         for (int indice = 0; indice < tamannoLista; indice++){
@@ -148,13 +190,13 @@ public class GestorDatosP
             PeliculaP peliculaBuscada = listaPeliculas.peliculaEnPosicion(indice);
             String[] actoresPeliculas = peliculaBuscada.actores;
             for (int indiceActor = 0; indiceActor < actoresPeliculas.length; indiceActor++){
-                
+
                 arbolActores.agrega(actoresPeliculas[indiceActor]);
             }
         }
-      }
-    
-       /**
+    }
+
+    /**
      * Recorrer cada pelicula de la lista, saca cada actor,lo  busca en el arbol de actores, crear un puntero de la lista de punteros
      * hacia el objeto pelicula de la lista de peliculas.
      * 
@@ -172,8 +214,8 @@ public class GestorDatosP
                 }
             }
         }   
-     }
-    
+    }
+
     /**
      * Metodo encargado de preguntar directamente cuales peliculas se encuentran en el actorBuscada
      * 

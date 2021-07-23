@@ -44,6 +44,16 @@ public class ControladorP
     }
     
     /**
+     * Consulta la informacion total de todas las pelicula que se encuentran en la categoriaBuscada
+     * 
+     * @param categoriaQuerida: Categoria que se toma como base para conseguir sus peliculas 
+     */
+    public void consultaTotalPeliculas(String categoriaQuerida){
+        System.out.println();
+        gestorDatos.consultaTotalPeliculas(categoriaQuerida);
+    }
+    
+    /**
      * Crear el arbol de categorias
      */
     public void creaArbolCategorias(){
@@ -129,10 +139,12 @@ public class ControladorP
         String menu = "1.Cargar datos de peliculas desde archivo\n2.Ver la lista de peliculas\n3.Crear al arbol de categorias\n" + 
                        "4.Crear al arbol de actores\n" + "5.Ver el arbol de categorias\n" + "6.Ver el arbol de actores\n" +
                        "7.Crear los punteros del arbol categoria \n" + "8.Crear los punteros del arbol actores \n" + 
-                       "9.Busqueda de peliculas dependiendo de categoria\n" +"10.Busqueda de peliculas dependiendo de actores\n" +"11.Salir";
+                       "9.Busqueda de peliculas dependiendo de categoria\n" 
+                       +"10.Busqueda de peliculas dependiendo de actores\n"
+                       + "11.Consulta de toda la informacion de las peliculas dependiendo de la categoria\n" + "12.Salir";
         int opcionDigitada;
         do{
-            opcionDigitada = controlaMenu(1,6,menu);
+            opcionDigitada = controlaMenu(1,12,menu);
             switch (opcionDigitada) {
                 case 1: cargaPeliculas();
                 break;
@@ -154,10 +166,17 @@ public class ControladorP
                 System.out.println("Deme una categoria que este disponible");
                 String categoria = in.nextLine();
                 consultaPeliculasCategoria(categoria);
+                break;
                 case 10:
                 System.out.println("Deme un actor que este disponible");
                 String actor = in.nextLine();
                 consultaPeliculasActor(actor);
+                break;
+                case 11: 
+                System.out.println("Deme una categoria que este disponible");
+                String categoria2 = in.nextLine();
+                consultaTotalPeliculas(categoria2); 
+                break;
                 default:
             }
         }while(opcionDigitada != 11);
