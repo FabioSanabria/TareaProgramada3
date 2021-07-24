@@ -179,7 +179,7 @@ public class ControladorP
                 break;
                 default:
             }
-        }while(opcionDigitada != 11);
+        }while(opcionDigitada != 12);
     }
     public static void main(){
         ControladorP controlador = new ControladorP();
