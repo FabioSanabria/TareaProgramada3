@@ -212,4 +212,33 @@ public class GestorDatosP
         }
 
     }
+    
+    /**
+     * Reagrupar categorias en el arbol de categorias, creando un nuevo nodo en el arbol para la nueva categoria
+     * y creano sus punteros a las peliculas que tienen alguna de las categorias seleccionadas.
+     * 
+     * @param nuevaCategoria El nombre de la nueva categoria que contendra a un grupo de categorias existentes
+     * @param listaCategoriasPorAgrupar Lista con los nombres de las categorias que se reagruparan en la nueva categoria
+     * 
+     */
+    public void reagrupaCategorias(String nuevaCategoria, Lista listaCategoriasPorAgrupar){
+        // Agregar la nueva categoria al arbol de categorias
+        this.arbolCategorias.agrega(nuevaCategoria);
+        // Recorrer toda la lista de peliculas
+        ListaPeliculasP iteradorListaPeliculas = this.listaPeliculas;
+        while(iteradorListaPeliculas != null){
+            // Obtener una pelicula
+            PeliculaP peliculaAsociada = iteradorListaPeliculas.pelicula;
+            // Obtener el vector de categorias de la pelicula
+            String[] categoriasPeliculas = peliculaAsociada.categorias;
+            // Para cada una de sus categorias verificar si es una categoria de la lista, de ser asi se crea un puntero a la pelicula
+            for (int indiceCategoria = 0; indiceCategoria < categoriasPeliculas.length; indiceCategoria++){
+                if (listaCategoriasPorAgrupar.exist(categoriasPeliculas[indiceCategoria])){
+                    this.arbolCategorias.enlazaConListaPeliculas(nuevaCategoria,iteradorListaPeliculas);
+                }    
+            }
+            // Mover al siguiente nodo
+            iteradorListaPeliculas = iteradorListaPeliculas.siguiente;
+        }
+    }
 }

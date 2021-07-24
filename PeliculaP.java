@@ -52,22 +52,23 @@ public class PeliculaP
         tiraDatos += "Id: " + this.showId + "\n";
         tiraDatos += "  Tipo: " + this.tipo + "\n";
         tiraDatos += "  Titulo: " + this.titulo + "\n";
-        // tiraDatos +=this.director = director;
-        tiraDatos += "  Actores:\n";
+        tiraDatos += "  Director: " + this.director + "\n";
+        tiraDatos += "  Actores: ";
         for(String  actor:this.actores){
-            tiraDatos += "    " + actor + "\n";
+            tiraDatos += ", "+ actor ;
         } 
-        // tiraDatos +=this.paisProcedencia = paisProcedencia;
-        // tiraDatos +=this.fechaAgregacion = fechaAgregacion;
-        // tiraDatos +=this.anoProduccion = anoProduccion;
-        // tiraDatos +=this.audiencia = audiencia;
-        // tiraDatos +=this.duracion = duracion;
-        tiraDatos += "  Categorias:\n";
+        tiraDatos += "\n";
+        tiraDatos += "  Pais: " + this.paisProcedencia + "\n";
+        tiraDatos += "  Fecha: " + this.fechaAgregacion + "\n";
+        tiraDatos += "  Año: " + this.anoProduccion + "\n";
+        tiraDatos += "  Audiencia: " + this.audiencia + "\n";
+        tiraDatos += "  Duracion: " + this.duracion + "\n";
+        tiraDatos += "  Categorias: ";
         for(String  categoria:this.categorias){
-            tiraDatos += "    " + categoria + "\n";
+            tiraDatos += ", " + categoria;
         } 
-        // tiraDatos +=this.categorias = categorias;
-        // tiraDatos +=this.descripcion = descripcion;
+        tiraDatos += "\n";
+        tiraDatos += "  Descripcion: " + this.descripcion + "\n\n";
         
         return tiraDatos;
     }

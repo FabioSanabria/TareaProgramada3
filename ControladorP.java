@@ -79,6 +79,38 @@ public class ControladorP
     }
     
     /**
+     * Validar los números digitados por un usuario
+     */
+    public int leeNumeroValido(String mensaje){
+        int numeroValido = -1;
+        boolean esNumeroValido = false;
+        do{
+            try {
+                numeroValido = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+                esNumeroValido = true;
+            }
+            catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Debe dar número válido");
+            }
+        }while(!esNumeroValido);
+        return numeroValido;
+    }
+    
+    /**
+     * Reagrupa varias categorias en una nueva
+     */
+    public void reagrupaCategorias(){
+        String nuevaCategoria = JOptionPane.showInputDialog("Digite el nombre de la nueva categoria");
+        int cantidadCategorias = leeNumeroValido("Digite la cantidad de categoria por reagrupar");
+        Lista listaCategoriasPorAgrupar = new Lista();
+        for (int i = 0; i < cantidadCategorias; i++){
+            String categoria = JOptionPane.showInputDialog("Digite el nombre de una categoria valida");
+            listaCategoriasPorAgrupar.add(categoria);
+        }
+        gestorDatos.reagrupaCategorias(nuevaCategoria, listaCategoriasPorAgrupar);
+    }
+    
+    /**
      * Controla que las opciones de un menú sean válidas
      * 
      * @param valorMenor El valor menor de las opciones
@@ -113,11 +145,12 @@ public class ControladorP
      */
     public void menuControlador(){
         String menu = "1.Cargar datos de peliculas desde archivo\n2.Ver la lista de peliculas\n3.Crear al arbol de categorias\n" + 
-                       "4.Crear al arbol de actores\n 5.Ver el arbol de categorias\n 6.Ver el arbol de actores\n" +
-                       "7.Visualizar peliculas de una categoria dada\n 8.Visualizar peliculas de un actor dado\n9.Salir";
+                       "4.Crear al arbol de actores\n5.Ver el arbol de categorias\n6.Ver el arbol de actores\n" +
+                       "7.Visualizar peliculas de una categoria dada\n8.Visualizar peliculas de un actor dado\n" + 
+                       "9.Reagrupar categorias\n10.Salir";
         int opcionDigitada;
         do{
-            opcionDigitada = controlaMenu(1,9,menu);
+            opcionDigitada = controlaMenu(1,10,menu);
             switch (opcionDigitada) {
                 case 1: cargaPeliculas();
                 break;
@@ -134,9 +167,12 @@ public class ControladorP
                 case 7: imprimePeliculasCategoria();
                 break;
                 case 8: imprimePeliculasActores();
+                break;
+                case 9: reagrupaCategorias();
+                break;
                 default:
             }
-        }while(opcionDigitada != 9);
+        }while(opcionDigitada != 10);
     }
     
     
