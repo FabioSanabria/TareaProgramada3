@@ -2,7 +2,7 @@
 /**
  * Maneja una lista simple cuyo nodo contiene un objeto pelicula
  * 
- * @author (your name) 
+ * @author (Maria Paula Oviedo B85836, Kendaly Grijalba C03523, Fabio Sanabria C07194) 
  * @version (a version number or a date)
  */
 public class ListaPeliculasP
@@ -32,7 +32,7 @@ public class ListaPeliculasP
     }
     
     /**
-     * Agregar una película a la lista
+     * Agregar una película a la lista (Basado en los programas del curso)
      * 
      * @param pelicula El objeto que contiene los datos de la película
      */
@@ -46,7 +46,6 @@ public class ListaPeliculasP
             // Si es solo un nodo
             if (this.siguiente == null){ 
                 this.siguiente = new ListaPeliculasP(pelicula);
-            
             }else{
                 // Si son muchos nodos
                 this.siguiente.agrega(pelicula);

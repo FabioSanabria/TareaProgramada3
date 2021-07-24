@@ -2,7 +2,7 @@
 /**
  * Write a description of class ListaPunterosP here.
  * 
- * @author (your name) 
+ * @author (Maria Paula Oviedo B85836, Kendaly Grijalba C03523, Fabio Sanabria C07194) 
  * @version (a version number or a date)
  */
 public class ListaPunterosP
@@ -71,5 +71,41 @@ public class ListaPunterosP
             }
 
         }
+    }
+    
+    /**
+     * Calcular el tamaño de la lista  (Basado en los programas del curso)
+     * 
+     * @return  El tamaño de la lista
+     */
+    public int tamanno(){
+        if (this.siguiente != null)
+            return 1 + this.siguiente.tamanno();
+        else
+            return 1;
+    }
+    
+    /**
+     * Buscar el objeto ListaPelicula que esta en una posicion dada (Basado en los programas del curso)
+     * 
+     * @param posicion La posicion en que se encuentra al objecto buscado
+     * @return  listaPeliculaBuscada El objeto ListaPelicula que se encuentra en la posicion indicada
+     */
+    public ListaPeliculasP punteroEnPosicion(int posicion){
+        int posicionInicial = 0;
+        ListaPunterosP iterador = this;
+        ListaPeliculasP punteroBuscado = null;
+        boolean encontrado = false;
+        while(!encontrado){
+            if(posicionInicial == posicion){
+                encontrado = true;
+                punteroBuscado = iterador.puntero;
+            }else{
+                iterador = iterador.siguiente;
+                posicionInicial++;
+            }
+        }
+
+        return punteroBuscado;
     }
 }

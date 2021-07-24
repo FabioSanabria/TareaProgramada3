@@ -2,7 +2,7 @@
 /**
  * Maneja los datos o atributos de una pelicula
  * 
- * @author (your name) 
+ * @author (Maria Paula Oviedo B85836, Kendaly Grijalba C03523, Fabio Sanabria C07194) 
  * @version (a version number or a date)
  */
 public class PeliculaP
